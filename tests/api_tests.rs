@@ -24,6 +24,10 @@ fn make_config() -> Config {
         webhook_retry_attempts: 1,
         webhook_retry_delay_ms: 0,
         webhook_timeout_secs: 10,
+        webhook_redrive_interval_secs: 30,
+        webhook_redrive_concurrency: 4,
+        webhook_redrive_max_attempts: 8,
+        webhook_redrive_grace_secs: 60,
         poll_interval_secs: 10,
         payment_ttl_secs: 3600,
         /* High enough that these tests never trip the limiter; dedicated
@@ -35,6 +39,7 @@ fn make_config() -> Config {
         listener_mode: ListenerMode::Poll,
         webhook_allow_private_targets: false,
         admin_provisioning_secret: TEST_ADMIN_SECRET.into(),
+        request_timeout_secs: 30,
     }
 }
 

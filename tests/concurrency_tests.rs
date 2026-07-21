@@ -78,6 +78,10 @@ fn make_state(pool: db::Db, _webhook_url: Option<String>) -> Arc<AppState> {
             webhook_retry_attempts: 1,
             webhook_retry_delay_ms: 0,
             webhook_timeout_secs: 10,
+            webhook_redrive_interval_secs: 30,
+            webhook_redrive_concurrency: 4,
+            webhook_redrive_max_attempts: 8,
+            webhook_redrive_grace_secs: 60,
             poll_interval_secs: 10,
             payment_ttl_secs: 3600,
             rate_limit_requests_per_sec: 10000,
@@ -88,6 +92,7 @@ fn make_state(pool: db::Db, _webhook_url: Option<String>) -> Arc<AppState> {
             // Allow loopback targets so we can use wiremock's 127.0.0.1 server.
             webhook_allow_private_targets: true,
             admin_provisioning_secret: String::new(),
+            request_timeout_secs: 30,
         },
         http: reqwest::Client::new(),
         webhook_http: reqwest::Client::new(),
